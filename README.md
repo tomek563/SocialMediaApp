@@ -1,11 +1,8 @@
 # SocialMediaApp
 Application of small social media. App downloads data from public API.
-
-## General info
-This project is simple Lorem ipsum dolor generator.
 	
 ## Technologies
-Project is created with:
+Project is created in:
 Java 11, 
 Spring 2.3.4,
 Thymeleaf 3.0.9, 

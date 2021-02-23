@@ -125,6 +125,7 @@ class PostServiceTest {
         assertThat(postService.getChangedPosts().get(0).getId(), equalTo(4));
         assertThat(postService.getChangedPosts().get(0).getTitle(), equalTo("Title four"));
     }
+
     @Test
     void editPostAndReturn_Should_Edit_Post_And_Return_It() {
 //        given
@@ -151,6 +152,7 @@ class PostServiceTest {
     private Post prepareFirstPost() {
         return new Post(1, 1, "Title one", "Story first", false);
     }
+
     private Post prepareSecondPost() {
         return new Post(1, 1, "Title twenty", "Story twenty", true);
     }

@@ -1,0 +1,31 @@
+#dict-name{
+display: inline-block;
+}
+#button-delete {
+margin-left: 20px;
+}
+.post-container {
+margin-left: 20px;
+display: inline-block;
+}
+
+#position-label {
+color:blue;
+margin-left: 50px;
+min-width: 200px;
+}
+
+.form-inline > form {
+display: inline-block;
+}
+.form-inline > form > input {
+display: inline-block;
+}
+
+.dict-container {
+margin: 50px 0;
+}
+
+.adding {
+margin-left: 20px;
+}

@@ -12,7 +12,6 @@ import socialmedia.sm.service.PostService;
 import javax.annotation.PostConstruct;
 import java.util.*;
 
-
 @Component
 public class TypicodeClient {
     private final PostRepository postRepository;

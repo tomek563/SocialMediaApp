@@ -20,4 +20,4 @@ Git
 
 	
 ## Setup
-User should provide its own username and password for Postgresql db
+User should provide its own datasource, username and password for Postgresql db

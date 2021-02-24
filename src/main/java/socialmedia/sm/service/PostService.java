@@ -25,21 +25,6 @@ public class PostService {
         return postRepository;
     }
 
-    public List<Post> getFilteredPostsBy(String title) {
-        List<Post> byTitle = findByTitle(title);
-        if (byTitle.isEmpty()) {
-            throw new PostNotFoundException("Nie znaleziono takiego posta!");
-        } else {
-            return byTitle;
-        }
-    }
-
-    private List<Post> findByTitle(String title) {
-        return postRepository.findAll().stream()
-                .filter(post -> post.getLowerCaseTitle().matches(".*" + title.toLowerCase() + ".*"))
-                .collect(Collectors.toList());
-    }
-
     public void deletePost(int idPost) {
         Post post = postRepository.findById(idPost)
                 .orElseThrow(() -> new PostNotFoundException("Nie znaleziono takiego posta!"));
@@ -76,5 +61,9 @@ public class PostService {
         found.setChanged(true);
         save(found);
         return found;
+    }
+
+    public List<Post> getFilteredPostsBy(String title) {
+        return postRepository.findByTitle(title);
     }
 }

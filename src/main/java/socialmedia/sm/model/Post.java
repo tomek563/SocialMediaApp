@@ -33,6 +33,14 @@ public class Post {
         this.changed = changed;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public int getId() {
         return id;
     }

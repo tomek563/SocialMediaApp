@@ -3,7 +3,6 @@ package socialmedia.sm.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import socialmedia.sm.client.TypicodeClient;
-import socialmedia.sm.request.RequestTitle;
 import socialmedia.sm.exceptions.PostNotFoundException;
 import socialmedia.sm.model.Post;
 import socialmedia.sm.service.PostService;
@@ -14,8 +13,8 @@ import java.util.List;
 @RequestMapping("/api/posts")
 public class PostRestController {
 
-    private PostService postService;
-    private TypicodeClient client;
+    private final PostService postService;
+    private final TypicodeClient client;
 
     public PostRestController(PostService postService, TypicodeClient client) {
         this.postService = postService;
@@ -29,23 +28,22 @@ public class PostRestController {
         if (updated) {
             client.updateData();
         }
-
         posts = postService.getPosts();
         return ResponseEntity.ok(posts);
     }
 
-    @PostMapping("/byTitle")
-    public ResponseEntity<List<Post>> getAllFiltered(@RequestBody RequestTitle titleHolder) {
-        return ResponseEntity.ok(postService.getFilteredPostsBy(titleHolder.getTitle()));
+    @GetMapping("/byTitle")
+    public ResponseEntity<List<Post>> getAllFilteredPosts(@RequestParam String title) {
+        return ResponseEntity.ok(postService.getFilteredPostsBy(title));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity.HeadersBuilder<?> delete(@PathVariable int id) {
+    public ResponseEntity<Post> delete(@PathVariable int id) {
         try {
             postService.deletePost(id);
-            return ResponseEntity.noContent();
+            return ResponseEntity.noContent().build();
         } catch (PostNotFoundException e) {
-            return ResponseEntity.notFound();
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -55,7 +53,7 @@ public class PostRestController {
             postService.editPostAndReturn(post);
             return ResponseEntity.ok(post);
         } catch (PostNotFoundException e) {
-            return (ResponseEntity<Post>) ResponseEntity.notFound();
+            return ResponseEntity.notFound().build();
         }
     }
 

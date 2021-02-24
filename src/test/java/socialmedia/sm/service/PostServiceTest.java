@@ -15,8 +15,7 @@ import java.util.Optional;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -38,19 +37,21 @@ class PostServiceTest {
     }
 
     @Test
-    void getFilteredPostsByTitle_Throws_Exception_When_Find_NoPost() {
+    void getFilteredPostsByTitle_Return_Empty_List_If_Not_Found() {
 //        given
-        when(postRepository.findAll()).thenReturn(posts);
+        when(postRepository.findByTitle(titleFirst)).thenReturn(new ArrayList<>());
 //        when
         PostService postService = new PostService(postRepository);
 //        then
-        assertThrows(PostNotFoundException.class, () -> postService.getFilteredPostsBy(titleFirst));
+        assertThat(postService.getFilteredPostsBy(titleFirst).size(), equalTo(0));
     }
 
     @Test
     void getFilteredPostsByTitle_Return_List_Of_Posts_With_Title() {
 //        given
-        when(postRepository.findAll()).thenReturn(posts);
+        List<Post> preparedPost = new ArrayList<>(posts);
+        preparedPost.remove(2);
+        when(postRepository.findByTitle(titleSecond)).thenReturn(preparedPost);
 //        when
         PostService postService = new PostService(postRepository);
 //        then

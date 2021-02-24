@@ -1,5 +1,6 @@
 package socialmedia.sm.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.Objects;
 @Table(name = "POST")
 public class Post {
     @Column(name = "userId")
+    @JsonIgnore
     private int userId;
     @Id
     @Column(name = "id")
@@ -32,11 +34,11 @@ public class Post {
         this.body = body;
         this.changed = changed;
     }
-
+    @JsonIgnore
     public int getUserId() {
         return userId;
     }
-
+    @JsonProperty
     public void setUserId(int userId) {
         this.userId = userId;
     }

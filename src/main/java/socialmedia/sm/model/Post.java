@@ -8,7 +8,6 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 @Entity
-@Table(name = "POST")
 public class Post {
     @Column(name = "userId")
     @JsonIgnore
